@@ -3,8 +3,6 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#define UNPACKED_BUFFER_SIZE 2048
-
 // function to unpack msgcode(in binary file) and converthem into JSON format
 void unpack(char const* buf, size_t len)
 {
