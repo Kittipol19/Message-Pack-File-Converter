@@ -15,8 +15,8 @@ void unpack(char const* buf, size_t len)
     msgpack_unpacked_init(&result); // initiate the variable result
     ret = msgpack_unpack_next(&result, buf, len, &off); // read the entire object and then next
 
-    // while loop to unpack msgcode format
-    while (ret == MSGPACK_UNPACK_SUCCESS) // if it(ret) returns smth and is successfully unpacked, the loop continues
+    // while loop to unpack messagecode format
+    while (ret == MSGPACK_UNPACK_SUCCESS) // if ret returns something and is success unpacked, the loop working
     {
         msgpack_object obj = result.data; // unpack the data and store it in this variable(obj)
 
@@ -27,9 +27,7 @@ void unpack(char const* buf, size_t len)
         msgpack_object_print_buffer(unpacked_buffer, UNPACKED_BUFFER_SIZE, obj);
         printf("%s\n", unpacked_buffer);
 
-        //If you want to allocate something on the zone, you can use zone
-        //msgpack_zone* zone = result.zone;
-        //The lifetime of the obj and the zone,
+        //if you want to allocate something on the zone, you can use zone
 
         ret = msgpack_unpack_next(&result, buf, len, &off);
     }
@@ -45,11 +43,11 @@ void unpack(char const* buf, size_t len)
 int main() 
 {
     FILE *fp;
-    char buff[255];
+    char buff[300];
     int buffLength;
     char *pos = buff;
     
-    fp = fopen("../msg_pack_bin_test.dat", "rb"); // read binary
+    fp = fopen("../msg_pack_test.dat", "rb"); // read binary
     fread(buff, sizeof(buff), 1, fp);
     
     buffLength = strlen(buff)/2;
